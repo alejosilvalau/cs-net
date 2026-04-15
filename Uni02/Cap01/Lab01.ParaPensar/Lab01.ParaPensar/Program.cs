@@ -1,4 +1,6 @@
-﻿namespace Lab01.ParaPensar {
+﻿using System.Globalization;
+
+namespace Lab01.ParaPensar {
   internal class Program {
     private static void Main(string[] args) {
       Console.WriteLine("Bienvenido!");
@@ -18,6 +20,14 @@
           case ConsoleKey.D3:
             Fibonacci();
             break;
+          case ConsoleKey.D4:
+            NumerosPares();
+            break;
+          case ConsoleKey.D5:
+            Console.WriteLine("\nIngrese el nombre del mes:");
+            string? nombreMes = Console.ReadLine();
+            if (nombreMes != null) NombreMes(nombreMes);
+            break;
           default:
             Console.WriteLine("\nIngrese de vuelta: ");
             break;
@@ -32,7 +42,9 @@
       Console.WriteLine("\nIngrese la opción deseada:");
       Console.WriteLine("\t1. Suma de números");
       Console.WriteLine("\t2. Año bisiesto");
-      Console.WriteLine("\t3. Serie Fibonacci");
+      Console.WriteLine("\t3. Serie fibonacci");
+      Console.WriteLine("\t4. Números pares entre 1 a 100");
+      Console.WriteLine("\t5. Nombre y número del mes");
       Console.WriteLine("\tESC. Salir");
     }
 
@@ -49,12 +61,12 @@
     private static void Bisiesto() {
       Console.WriteLine("\nAño bisiesto:");
       Console.WriteLine("Ingrese un año:");
-      int año = Convert.ToInt32(Console.ReadLine());
-      bool esBisiesto = (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
+      int anio = Convert.ToInt32(Console.ReadLine());
+      bool esBisiesto = (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
       if (esBisiesto) {
-        Console.WriteLine($"El año {año} es bisiesto.");
+        Console.WriteLine($"El año {anio} es bisiesto.");
       } else {
-        Console.WriteLine($"El año {año} no es bisiesto.");
+        Console.WriteLine($"El año {anio} no es bisiesto.");
       }
     }
 
@@ -70,6 +82,20 @@
         a = b;
         b = c;
       }
+    }
+
+    private static void NumerosPares() {
+      Console.WriteLine("\nNúmeros pares entre 1 y 100:");
+      for (int i = 2; i <= 100; i += 2) {
+        Console.Write($"{i} ");
+      }
+      Console.WriteLine("");
+    }
+
+    private static void NombreMes(string nombreMes) {
+      int numeroMes = DateTime.ParseExact(nombreMes.ToLower(), "MMMM", new CultureInfo("es-ES")).Month;
+
+      Console.WriteLine($"\n{nombreMes} + {numeroMes}");
     }
   }
 }
