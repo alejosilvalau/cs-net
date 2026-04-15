@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 
 namespace Lab01.ParaPensar {
   internal class Program {
@@ -28,6 +29,12 @@ namespace Lab01.ParaPensar {
             string? nombreMes = Console.ReadLine();
             if (nombreMes != null) NombreMes(nombreMes);
             break;
+          case ConsoleKey.D6:
+            NumeroRomano();
+            break;
+          case ConsoleKey.D7:
+            NumerosPrimosGemelos();
+            break;
           default:
             Console.WriteLine("\nIngrese de vuelta: ");
             break;
@@ -45,6 +52,8 @@ namespace Lab01.ParaPensar {
       Console.WriteLine("\t3. Serie fibonacci");
       Console.WriteLine("\t4. Números pares entre 1 a 100");
       Console.WriteLine("\t5. Nombre y número del mes");
+      Console.WriteLine("\t6. Número romano");
+      Console.WriteLine("\t7. Números primos gemelos");
       Console.WriteLine("\tESC. Salir");
     }
 
@@ -96,6 +105,76 @@ namespace Lab01.ParaPensar {
       int numeroMes = DateTime.ParseExact(nombreMes.ToLower(), "MMMM", new CultureInfo("es-ES")).Month;
 
       Console.WriteLine($"\n{nombreMes} + {numeroMes}");
+    }
+
+    private static void NumeroRomano() {
+      Console.WriteLine("\nNúmero romano:");
+      Console.WriteLine("Ingrese un número entero:");
+      int num = Convert.ToInt32(Console.ReadLine());
+
+      var valoresRomanos = new List<KeyValuePair<int, string>>
+      {
+        new KeyValuePair<int, string>(1000, "M"),
+        new KeyValuePair<int, string>(900, "CM"),
+        new KeyValuePair<int, string>(500, "D"),
+        new KeyValuePair<int, string>(400, "CD"),
+        new KeyValuePair<int, string>(100, "C"),
+        new KeyValuePair<int, string>(90, "XC"),
+        new KeyValuePair<int, string>(50, "L"),
+        new KeyValuePair<int, string>(40, "XL"),
+        new KeyValuePair<int, string>(10, "X"),
+        new KeyValuePair<int, string>(9, "IX"),
+        new KeyValuePair<int, string>(5, "V"),
+        new KeyValuePair<int, string>(4, "IV"),
+        new KeyValuePair<int, string>(1, "I")
+    };
+
+      StringBuilder romano = new StringBuilder();
+      int originalNum = num;
+
+      foreach (var par in valoresRomanos) {
+        while (num >= par.Key) {
+          num -= par.Key;
+          romano.Append(par.Value);
+        }
+      }
+      Console.WriteLine($"\nEl equivalente de {originalNum} en romano es: {romano}");
+    }
+
+    private static void NumerosPrimosGemelos() {
+      Console.WriteLine("\nNúmeros primos gemelos:");
+      Console.WriteLine("Ingrese un número entero:");
+      int n = Convert.ToInt32(Console.ReadLine());
+
+      List<int> primos = new List<int>();
+      for (int i = 2; i <= n; i++) {
+        bool esPrimo = true;
+
+        // Optimización: solo verificar hasta la raíz cuadrada de i,
+        // ya que si i es divisible por algún número mayor a su raíz cuadrada,
+        // entonces también lo será por un número menor.
+        for (int j = 2; j <= Math.Sqrt(i); j++) {
+          if (i % j == 0) {
+            esPrimo = false;
+            break;
+          }
+        }
+        if (esPrimo) {
+          primos.Add(i);
+        }
+      }
+
+      Console.WriteLine("Números primos gemelos:");
+      bool encontradosGemelos = false;
+      for (int i = 0; i < primos.Count - 1; i++) {
+        if (primos[i + 1] - primos[i] == 2) {
+          Console.WriteLine($"{primos[i]} y {primos[i + 1]}");
+          encontradosGemelos = true;
+        }
+      }
+      if (!encontradosGemelos) {
+        Console.WriteLine("No se encontraron números primos gemelos.");
+      }
     }
   }
 }
