@@ -35,6 +35,12 @@ namespace Lab01.ParaPensar {
           case ConsoleKey.D7:
             NumerosPrimosGemelos();
             break;
+          case ConsoleKey.D8:
+            Clave();
+            break;
+          case ConsoleKey.D9:
+            ArbolAscii();
+            break;
           default:
             Console.WriteLine("\nIngrese de vuelta: ");
             break;
@@ -54,6 +60,8 @@ namespace Lab01.ParaPensar {
       Console.WriteLine("\t5. Nombre y número del mes");
       Console.WriteLine("\t6. Número romano");
       Console.WriteLine("\t7. Números primos gemelos");
+      Console.WriteLine("\t8. Algoritmo de clave");
+      Console.WriteLine("\t9. Arbol ASCII");
       Console.WriteLine("\tESC. Salir");
     }
 
@@ -174,6 +182,46 @@ namespace Lab01.ParaPensar {
       }
       if (!encontradosGemelos) {
         Console.WriteLine("No se encontraron números primos gemelos.");
+      }
+    }
+
+    private static void Clave() {
+      Console.WriteLine("\nAlgoritmo de clave:");
+      int intento = 0;
+
+      Console.WriteLine("Introduzca la clave a verificar:");
+      string? clave = Console.ReadLine();
+
+      Console.WriteLine("\nSimulación de Log In");
+      string? claveIngresada;
+      while (intento < 4) {
+        intento++;
+        Console.WriteLine("Introduzca la clave:");
+
+        claveIngresada = Console.ReadLine();
+
+        if (claveIngresada == clave) {
+          Console.WriteLine("Clave correcta.");
+          break;
+        } else {
+          Console.WriteLine("Clave incorrecta.");
+        }
+      }
+    }
+
+    private static void ArbolAscii() {
+      Console.WriteLine("\nÁrbol ASCII:");
+      Console.WriteLine("Ingrese un número filas:");
+      int nf = Convert.ToInt32(Console.ReadLine());
+
+      Console.WriteLine("");
+      int anchoMax = nf * 2 - 1;
+
+      for (int i = 1; i <= nf; i++) {
+        int numAsteriscos = i * 2 - 1;
+        string fila = new string('*', numAsteriscos);
+        int espaciosIzq = (anchoMax - fila.Length) / 2;
+        Console.WriteLine(new string(' ', espaciosIzq) + fila);
       }
     }
   }
