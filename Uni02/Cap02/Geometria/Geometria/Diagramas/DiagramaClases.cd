@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Geometria.Circulo">
+    <Position X="8.75" Y="2" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQIBAAAAAAAAA=</HashCode>
+      <FileName>Circulo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometria.Triangulo">
+    <Position X="5.5" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AFADAAAAAAEAAAAAAAAAAACEAACAAAAAIBAAgAAAQAA=</HashCode>
+      <FileName>Triangulo.cs</FileName>
+      <NewMemberFileName>Circulo.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometria.Poligono">
+    <Position X="2" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAABAAQAAAAAAAAAAACAAAAAAIhAAAIAAAAA=</HashCode>
+      <FileName>Poligono.cs</FileName>
+      <NewMemberFileName>Circulo.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometria.Rectangulo">
+    <Position X="1.5" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAACAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Poligono.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometria.Cuadrado">
+    <Position X="1.75" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Poligono.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
