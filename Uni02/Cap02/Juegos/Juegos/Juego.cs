@@ -7,70 +7,53 @@
         public Juego()
         {
             _record = new Jugada(0);
+            _record.Intentos = int.MaxValue;
+            _record.Adivino = true;
         }
 
         public void ComenzarJuego()
         {
             bool continuarJuego = true;
-            Console.WriteLine("Comenzando el juego...");
 
             while (continuarJuego)
             {
-                Console.WriteLine("\nIngrese el número máximo:");
-                if (int.TryParse(Console.ReadLine(), out int maximo))
-                {
-                    Console.WriteLine("\nNueva jugada creada!");
-                    Jugada j = new Jugada(maximo);
-
-                    bool continuarJugada = true;
-
-                    while (continuarJugada)
-                    {
-                        Console.WriteLine("\nIngrese el número que usted piensa que es:");
-                        if (int.TryParse(Console.ReadLine(), out int num))
-                        {
-                            j.Comparar(num);
-
-                            if (j.Adivino == true)
-                            {
-                                Console.WriteLine("\nAdivinaste el número!");
-                                CompararRecord(j);
-                                continuarJugada = false;
-                            }
-                            else
-                            {
-                                Console.WriteLine("\nNúmero equivocado!");
-                            }
-                        }
-                        if (continuarJugada)
-                        {
-                            continuarJugada = Continuar("la jugada");
-                        }
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Entrada inválida. Por favor, ingrese un número válido.");
-                }
-                if (continuarJuego)
-                {
-                    continuarJuego = Continuar("el juego");
-                }
+                Console.WriteLine("Comenzando el juego...");
+                PreguntarMaximo();
+                continuarJuego = Continuar("Continuar programa");
             }
         }
 
-        private void CompararRecord(Jugada j)
+        private void PreguntarMaximo()
         {
-            if (j.Intentos > PreguntarMaximo())
+            Console.WriteLine("Ingrese el número máximo:");
+            if (int.TryParse(Console.ReadLine(), out int maximo))
             {
-                _record = j;
-                Console.WriteLine("\nNuevo record conseguido!");
+                Console.WriteLine("Nueva jugada creada!");
+                Jugada j = new Jugada(maximo);
+
+                bool continuarJugada = true;
+                while (continuarJugada)
+                {
+                    PreguntarNumero(j);
+                    if (!j.Adivino)
+                    {
+                        continuarJugada = Continuar("Desea continuar la jugada");
+                    }
+                    else
+                    {
+                        continuarJugada = false;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Por favor, ingrese un número máximo válido.");
             }
         }
 
         private bool Continuar(string mensaje)
         {
-            Console.WriteLine($"¿Desea continuar {mensaje}? (s/n)");
+            Console.WriteLine($"\n¿{mensaje}? (s/n)");
             string? respuesta = Console.ReadLine();
             if (string.IsNullOrEmpty(respuesta))
             {
@@ -79,13 +62,38 @@
             return respuesta?.ToLower() == "s";
         }
 
-        private int PreguntarMaximo()
+        private void PreguntarNumero(Jugada j)
         {
-            return _record.Intentos;
+            Console.WriteLine("\nIngrese el número que usted piensa que es:");
+            if (int.TryParse(Console.ReadLine(), out int num))
+            {
+                j.Comparar(num);
+                if (j.Adivino == true)
+                {
+                    Console.WriteLine("Adivinaste el número!");
+                    CompararRecord(j);
+                }
+                else
+                {
+                    Console.WriteLine("Número equivocado!");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Por favor, ingrese un número válido.");
+            }
         }
-        private int PreguntarNumero()
+        private void CompararRecord(Jugada j)
         {
-            return _record.Numero;
+            if (j.Intentos < _record.Intentos)
+            {
+                int intentosAnterior = _record.Intentos;
+                _record = j;
+                Console.WriteLine("Nuevo record conseguido!");
+                if (intentosAnterior != int.MaxValue) Console.WriteLine($"Anterior: {intentosAnterior} intentos");
+                Console.WriteLine($"Nuevo: {_record.Intentos} intentos");
+            }
         }
     }
 }
