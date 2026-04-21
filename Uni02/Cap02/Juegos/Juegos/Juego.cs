@@ -53,13 +53,27 @@
 
         private bool Continuar(string mensaje)
         {
-            Console.WriteLine($"\n¿{mensaje}? (s/n)");
-            string? respuesta = Console.ReadLine();
-            if (string.IsNullOrEmpty(respuesta))
+            while (true)
             {
-                return false;
+                Console.WriteLine($"\n¿{mensaje}? (s/n)");
+                string? respuesta = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(respuesta))
+                {
+                    continue;
+                }
+
+                respuesta = respuesta.Trim().ToLower();
+
+                if (respuesta == "s")
+                {
+                    return true;
+                }
+                else if (respuesta == "n")
+                {
+                    return false;
+                }
             }
-            return respuesta?.ToLower() == "s";
         }
 
         private void PreguntarNumero(Jugada j)
