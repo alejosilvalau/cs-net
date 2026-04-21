@@ -2,11 +2,11 @@
 {
     internal class Juego
     {
-        private Jugada _record;
+        private JugadaConAyuda _record;
 
         public Juego()
         {
-            _record = new Jugada(0);
+            _record = new JugadaConAyuda(0);
             _record.Intentos = int.MaxValue;
             _record.Adivino = true;
         }
@@ -29,7 +29,7 @@
             if (int.TryParse(Console.ReadLine(), out int maximo))
             {
                 Console.WriteLine("Nueva jugada creada!");
-                Jugada j = new Jugada(maximo);
+                JugadaConAyuda j = new JugadaConAyuda(maximo);
 
                 bool continuarJugada = true;
                 while (continuarJugada)
@@ -76,7 +76,7 @@
             }
         }
 
-        private void PreguntarNumero(Jugada j)
+        private void PreguntarNumero(JugadaConAyuda j)
         {
             Console.WriteLine("\nIngrese el número que usted piensa que es:");
             if (int.TryParse(Console.ReadLine(), out int num))
@@ -98,7 +98,7 @@
                 Console.WriteLine("Entrada inválida. Por favor, ingrese un número válido.");
             }
         }
-        private void CompararRecord(Jugada j)
+        private void CompararRecord(JugadaConAyuda j)
         {
             if (j.Intentos < _record.Intentos)
             {

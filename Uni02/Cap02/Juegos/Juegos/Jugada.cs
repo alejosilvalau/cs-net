@@ -36,10 +36,10 @@
             Numero = rnd.Next(1, maxNumero + 1);
         }
 
-        public void Comparar(int numero)
+        public virtual void Comparar(int num)
         {
             Intentos++;
-            if (numero == Numero)
+            if (num == Numero)
             {
                 Adivino = true;
             }
