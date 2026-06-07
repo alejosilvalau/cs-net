@@ -32,6 +32,10 @@
         {
             var provinciasConSoT = provincias.Where(p => p.ToLower().Contains("s") || p.ToLower().Contains("t")).ToList();
 
+            //var provinciasConSoT = (from provincia in provincias
+            //                        where provincia.ToLower().Contains("s") || provincia.ToLower().Contains("t")
+            //                        select provincia).ToList();
+
             Console.WriteLine("");
             Console.WriteLine("Lista de provincias que contienen 's' o 't':");
 
