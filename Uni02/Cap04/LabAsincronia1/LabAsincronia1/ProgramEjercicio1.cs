@@ -5,13 +5,24 @@ using System.Threading.Tasks;
 
 namespace LabAsincronia1
 {
-    internal class Program
+    internal class ProgramEjercicio1
     {
         private static readonly Stopwatch _stopwatch = new Stopwatch();
         static void Main(string[] args)
         {
             Console.WriteLine("Programa de simulación de operaciones asincrónicas");
             CompararSincronoVsAsincrono();
+        }
+
+        private static void CompararSincronoVsAsincrono()
+        {
+            Console.WriteLine("Comparación entre operación sincrónica y asincrónica");
+
+            SimularOperacionPesada();
+
+            SimularOperacionPesadaAsync();
+            Console.WriteLine("Operación asincrónica iniciada, pero no bloquea el hilo principal\n");
+            Console.ReadLine();
         }
 
         private static void SimularOperacionPesada()
@@ -36,17 +47,6 @@ namespace LabAsincronia1
 
             _stopwatch.Stop();
             Console.WriteLine($"Operación asincrónica completada en {_stopwatch.ElapsedMilliseconds} ms");
-        }
-
-        private static void CompararSincronoVsAsincrono()
-        {
-            Console.WriteLine("Comparación entre operación sincrónica y asincrónica");
-
-            SimularOperacionPesada();
-
-            SimularOperacionPesadaAsync();
-            Console.WriteLine("Operación asincrónica iniciada, pero no bloquea el hilo principal\n");
-            Console.ReadLine();
         }
     }
 }
