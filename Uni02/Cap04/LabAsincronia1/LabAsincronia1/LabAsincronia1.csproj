@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>LabAsincronia1.ProgramEjercicio5</StartupObject>
+    <StartupObject>LabAsincronia1.ProgramEjercicio6</StartupObject>
   </PropertyGroup>
 
 </Project>
