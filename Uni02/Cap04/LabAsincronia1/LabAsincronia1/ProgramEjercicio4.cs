@@ -30,3 +30,15 @@ namespace LabAsincronia1
         }
     }
 }
+
+/*
+ * A. ¿En qué situaciones prácticas usarías el progreso? 
+ *    - Cuando se realizan operaciones largas y se desea informar al usuario sobre el estado actual.
+ *    - En aplicaciones con interfaces gráficas para actualizar barras de progreso.
+ *    - En procesos de descarga o carga de archivos para mostrar el avance.
+ * 
+ * B. ¿Cuál es la ventaja de IProgress<T> respecto a pasar simplemente una acción (un Action<int>)? 
+ *    - IProgress<T> proporciona una forma segura de informar el progreso desde hilos en segundo plano.
+ *    - Permite desacoplar la lógica de progreso de la lógica de la operación.
+ *    - Facilita la actualización de la interfaz de usuario desde hilos en segundo plano sin necesidad de invocar manualmente el hilo de la UI.
+ */
