@@ -9,6 +9,10 @@
       {
         "Path": "Lab2ConsumirConsola\\Lab2ConsumirConsola.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "Lab3ConsumirEscritorio\\Lab3ConsumirEscritorio.csproj",
+        "Action": "Start"
       }
     ]
   }
