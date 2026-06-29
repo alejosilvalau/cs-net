@@ -1,4 +1,6 @@
-﻿namespace Lab1ServiciosCrear
+﻿using Dominio;
+
+namespace Lab1Crear
 {
     public static class AlumnoEndpoints
     {

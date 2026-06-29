@@ -1,4 +1,4 @@
-﻿namespace Lab1ServiciosCrear
+﻿namespace Dominio
 {
     public class Alumno
     {
@@ -23,6 +23,11 @@
         public static int ObtenerProximoId()
         {
             return Lista.Count > 0 ? Lista.Max(a => a.Id) + 1 : 1;
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Apellido: {Apellido}, Nombre: {Nombre}, Legajo: {Legajo}, Direccion: {Direccion}";
         }
     }
 }
