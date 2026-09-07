@@ -1,0 +1,42 @@
+﻿@page "/alumnos/{AlumnoId:int}"
+@rendermode InteractiveServer
+@using LabBlazor.Data
+@using LabBlazor.Models
+@inject LabBlazorContext DbCtx
+
+<PageTitle>Detalle Alumno</PageTitle>
+
+<h3>AlumnoDetalle</h3>
+
+@if (alumno == null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@alumno.Nombre</dd>
+
+        <dt class="col-sm-3">Apellido</dt>
+        <dd class="col-sm-9">@alumno.Apellido</dd>
+
+        <dt class="col-sm-3">Legajo</dt>
+        <dd class="col-sm-9">@alumno.Legajo</dd>
+
+        <dt class="col-sm-3">Direccion</dt>
+        <dd class="col-sm-9">@alumno.Direccion</dd>
+    </dl>
+}
+
+@code {
+    [Parameter]
+    public int AlumnoId { get; set; }
+
+    private Alumno? alumno;
+
+    protected override async Task OnInitializedAsync()
+    {
+        alumno = await DbCtx.Alumnos.FindAsync(AlumnoId);
+    }
+}
