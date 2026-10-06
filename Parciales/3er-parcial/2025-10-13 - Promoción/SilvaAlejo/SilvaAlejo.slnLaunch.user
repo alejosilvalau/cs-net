@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Silva.WebApi\\Silva.WebApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Silva.UI.Blazor\\Silva.UI.Blazor.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Inmobiliaria.WebApi\\Inmobiliaria.WebApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Inmobiliaria.UI.Desktop\\Inmobiliaria.UI.Desktop.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

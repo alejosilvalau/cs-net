@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "API + Desktop",
+    "Projects": [
+      {
+        "Path": "Silva.WebApi\\Silva.WebApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Silva.UI.Desktop\\Silva.UI.Desktop.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

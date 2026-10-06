@@ -1,0 +1,70 @@
+@page "/promociones/alta"
+@using Silva.UI.Blazor.Models
+@using Silva.UI.Blazor.Services
+@inject PromocionApiClient Api
+@inject NavigationManager Nav
+
+<PageTitle>Agregar Promoción</PageTitle>
+
+<h1>Agregar Promoción</h1>
+<p class="text-muted">El estado se setea automáticamente como Activa.</p>
+
+<EditForm Model="@dto" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre (*):</label>
+        <InputText class="form-control" @bind-Value="dto.Nombre" />
+        <ValidationMessage For="@(() => dto.Nombre)" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descuento % (1-100):</label>
+        <InputNumber class="form-control" @bind-Value="dto.Descuento" />
+        <ValidationMessage For="@(() => dto.Descuento)" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha inicio:</label>
+        <InputDate class="form-control" @bind-Value="dto.FechaInicio" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha fin:</label>
+        <InputDate class="form-control" @bind-Value="dto.FechaFin" />
+    </div>
+
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" @onclick='() => Nav.NavigateTo("/promociones")'>Cancelar</button>
+</EditForm>
+
+@code {
+    private PromocionDto dto = new();
+    private string? error;
+
+    private async Task Guardar()
+    {
+        try
+        {
+            error = null;
+            if (dto.FechaInicio >= dto.FechaFin)
+            {
+                error = "El campo FechaInicio debe ser inferior a la FechaFin.";
+                return;
+            }
+            await Api.AddAsync(dto);
+            Nav.NavigateTo("/promociones");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            error = "Ocurrió un error inesperado al guardar.";
+        }
+    }
+}

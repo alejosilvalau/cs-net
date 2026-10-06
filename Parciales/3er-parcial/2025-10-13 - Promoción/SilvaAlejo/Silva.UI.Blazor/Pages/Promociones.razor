@@ -1,0 +1,106 @@
+@page "/promociones"
+@using Silva.UI.Blazor.Models
+@using Silva.UI.Blazor.Services
+@inject PromocionApiClient Api
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>Promociones</PageTitle>
+
+<h1>Promociones</h1>
+
+<div class="row mb-3">
+    <div class="col-auto">
+        <label class="form-label">Estado:</label>
+        <select class="form-select" @bind="estado">
+            <option value="Activa">Activa</option>
+            <option value="Expirada">Expirada</option>
+        </select>
+    </div>
+    <div class="col-auto align-self-end">
+        <button class="btn btn-primary" @onclick="Cargar">Filtrar</button>
+        <button class="btn btn-success" @onclick='() => Nav.NavigateTo("/promociones/alta")'>Agregar</button>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(error))
+{
+    <div class="alert alert-danger">@error</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Descuento</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in items)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Nombre</td>
+                <td>@p.FechaInicio.ToString("dd/MM/yyyy")</td>
+                <td>@p.FechaFin.ToString("dd/MM/yyyy")</td>
+                <td>@p.Descuento%</td>
+                <td>@p.Estado</td>
+                <td>
+                    @if (p.Estado == "Activa")
+                    {
+                        <button class="btn btn-sm btn-warning" @onclick="() => Expirar(p)">Expirar</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private string estado = "Activa";
+    private List<PromocionDto> items = new();
+    private string? error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+
+    private async Task Cargar()
+    {
+        try
+        {
+            error = null;
+            items = await Api.GetByEstadoAsync(estado);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            error = "Ocurrió un error inesperado al cargar.";
+        }
+    }
+
+    private async Task Expirar(PromocionDto p)
+    {
+        try
+        {
+            bool confirm = await JS.InvokeAsync<bool>("confirm", $"¿Expirar promoción {p.Nombre}?");
+            if (!confirm)
+            {
+                return;
+            }
+            await Api.ExpirarAsync(p.Id);
+            await Cargar();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            error = "Ocurrió un error inesperado al expirar.";
+        }
+    }
+}
